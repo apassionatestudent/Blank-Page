@@ -68,97 +68,11 @@
     https://github.com/apassionatestudent/thesis-test-projectV2 
 
 
+    ACT Task Documentation
 
-CREATE TABLE Roles (
-    RoleID INT IDENTITY(1,1) PRIMARY KEY,
-    RoleName VARCHAR(50) UNIQUE NOT NULL
-);
-
-CREATE TABLE Profiles (
-    ProfileID INT IDENTITY(1,1) PRIMARY KEY,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    Age INT,
-    Gender VARCHAR(10),
-    Phone VARCHAR(20),
-    Address NVARCHAR(MAX),
-    Email VARCHAR(100) UNIQUE,
-    Status VARCHAR(10) DEFAULT 'Inactive'
-);
-
-CREATE TABLE Users (
-    UserID INT IDENTITY(1,1) PRIMARY KEY,
-    Username VARCHAR(50) UNIQUE NOT NULL,
-    PasswordHash VARCHAR(255) NOT NULL,
-    RoleID INT,
-    ProfileID INT,
-    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID),
-    FOREIGN KEY (ProfileID) REFERENCES Profiles(ProfileID)
-);
-
-CREATE TABLE Departments (
-    DepartmentID INT IDENTITY(1,1) PRIMARY KEY,
-    DepartmentName VARCHAR(100) UNIQUE NOT NULL
-);
-
-CREATE TABLE Students (
-    StudentID INT IDENTITY(1,1) PRIMARY KEY,
-    ProfileID INT UNIQUE,
-    EnrollmentDate DATE NOT NULL,
-    FOREIGN KEY (ProfileID) REFERENCES Profiles(ProfileID)
-);
-
-CREATE TABLE Instructors (
-    InstructorID INT IDENTITY(1,1) PRIMARY KEY,
-    ProfileID INT UNIQUE,
-    HireDate DATE NOT NULL,
-    DepartmentID INT,
-    FOREIGN KEY (ProfileID) REFERENCES Profiles(ProfileID),
-    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
-);
+    https://drive.google.com/drive/folders/1gnNkFkFpE7AXS3H_3sNrCBybiY7StNaa?usp=sharing 
 
 
-
-CREATE TABLE Semesters (
-    SemesterID INT IDENTITY(1,1) PRIMARY KEY,
-    AcademicYear INT NOT NULL,
-    TermName VARCHAR(30) NOT NULL,
-    CONSTRAINT UC_Semester UNIQUE(AcademicYear, TermName)
-);
-
-CREATE TABLE Courses (
-    CourseID INT IDENTITY(1,1) PRIMARY KEY,
-    CourseName VARCHAR(200) NOT NULL,
-    CourseCode VARCHAR(20) UNIQUE NOT NULL,
-    Description TEXT,
-    Credits DECIMAL(4,1) CHECK(Credits > 0 AND Credits <= 12),
-    InstructorID INT,
-    DepartmentID INT,
-    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID),
-    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
-);
-
-CREATE TABLE Enrollment (
-    EnrollmentID INT IDENTITY(1,1) PRIMARY KEY,
-    StudentID INT,
-    CourseID INT,
-    SemesterID INT,
-    Grade DECIMAL(5,2),
-    DateRecorded DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
-    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID),
-    FOREIGN KEY (SemesterID) REFERENCES Semesters(SemesterID)
-);
-
-SELECT * FROM Roles;
-SELECT * FROM Profiles;
-SELECT * FROM Users;
-SELECT * FROM Departments;
-SELECT * FROM Students;
-SELECT * FROM Instructors;
-SELECT * FROM Semesters;
-SELECT * FROM Courses;
-SELECT * FROM Enrollment;
 
 
     -->
